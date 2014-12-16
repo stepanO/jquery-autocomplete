@@ -321,7 +321,7 @@
         this.dom.$results = $('<div></div>').hide().addClass(this.options.resultsClass).css({
             position: 'absolute'
         });
-        $('body').append(this.dom.$results);
+         this.dom.$elem.parent().append(this.dom.$results);
 
         /**
          * Attach keyboard monitoring to $elem
@@ -437,16 +437,16 @@
      * @private
      */
     $.Autocompleter.prototype.position = function() {
-        var offset = this.dom.$elem.offset();
+        var elPosition = this.dom.$elem.position();
         var height = this.dom.$results.outerHeight();
         var totalHeight = $(window).outerHeight();
-        var inputBottom = offset.top + this.dom.$elem.outerHeight();
+        var inputBottom = elPosition.top + this.dom.$elem.outerHeight();
         var bottomIfDown = inputBottom + height;
         // Set autocomplete results at the bottom of input
-        var position = {top: inputBottom, left: offset.left};
+        var position = {top: inputBottom, left: elPosition.left};
         if (bottomIfDown > totalHeight) {
             // Try to set autocomplete results at the top of input
-            var topIfUp = offset.top - height;
+            var topIfUp = elPosition.top - height;
             if (topIfUp >= 0) {
                 position.top = topIfUp;
             }
